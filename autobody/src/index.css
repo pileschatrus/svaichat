@@ -1,0 +1,429 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Unbounded", "Onest", system-ui, sans-serif;
+  --font-body: "Onest", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-ink-950: #08090b;
+  --color-ink-900: #0e0f12;
+  --color-ink-850: #131418;
+  --color-ink-800: #191b20;
+  --color-ink-700: #23262d;
+  --color-ink-600: #30343d;
+  --color-ink-500: #4a4f5a;
+
+  --color-fog-50: #f7f7f8;
+  --color-fog-100: #ececee;
+  --color-fog-200: #d6d7db;
+  --color-fog-300: #b4b6bd;
+  --color-fog-400: #8d9099;
+  --color-fog-500: #6b6f79;
+
+  --color-lava-300: #ffb08a;
+  --color-lava-400: #ff7a45;
+  --color-lava-500: #ff5a1f;
+  --color-lava-600: #e0440c;
+  --color-lava-700: #b33306;
+
+  --color-ice-400: #7dd3fc;
+  --color-mint-400: #34d399;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-ink-950 font-body text-fog-100 antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-lava-500);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-lava-400);
+    outline-offset: 2px;
+  }
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+/* ---------- типографика ---------- */
+.h-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+}
+.chrome {
+  background: linear-gradient(180deg, #ffffff 0%, #e4e5e9 45%, #8d9099 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.lava-text {
+  background: linear-gradient(100deg, #ffb08a 0%, #ff5a1f 45%, #ff2d55 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-fog-400);
+}
+
+/* ---------- поверхности ---------- */
+.glass {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.card {
+  background: linear-gradient(180deg, #15161a 0%, #101114 100%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 20px 50px -30px rgba(0, 0, 0, 0.8);
+}
+.card-hover {
+  transition:
+    transform 0.5s var(--ease-out-expo),
+    border-color 0.3s,
+    box-shadow 0.5s;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 122, 69, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 30px 60px -30px rgba(255, 90, 31, 0.35);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 0.95rem 1.5rem;
+  transition:
+    transform 0.25s var(--ease-out-expo),
+    box-shadow 0.3s,
+    background 0.3s,
+    border-color 0.3s;
+  white-space: nowrap;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn-lava {
+  color: #fff;
+  background: linear-gradient(180deg, #ff7a45 0%, #ff5a1f 55%, #e0440c 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 14px 34px -12px rgba(255, 90, 31, 0.75);
+}
+.btn-lava:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 18px 44px -10px rgba(255, 90, 31, 0.9);
+  transform: translateY(-1px);
+}
+.btn-ghost {
+  color: var(--color-fog-100);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+.btn-sm {
+  padding: 0.6rem 1rem;
+  font-size: 13px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--color-fog-200);
+  transition: all 0.2s;
+}
+.chip:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.chip[aria-pressed="true"] {
+  border-color: var(--color-lava-500);
+  background: rgba(255, 90, 31, 0.14);
+  color: #fff;
+}
+
+.field {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.85rem 1rem;
+  font-size: 15px;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.field::placeholder {
+  color: var(--color-fog-500);
+}
+.field:focus {
+  border-color: var(--color-lava-500);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ---------- фон ---------- */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+}
+.glow-lava {
+  background: radial-gradient(closest-side, rgba(255, 90, 31, 0.35), transparent);
+  filter: blur(40px);
+}
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+}
+
+/* ---------- анимации ---------- */
+.js .rv {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s var(--ease-out-expo),
+    transform 0.9s var(--ease-out-expo);
+}
+.js .rv.on {
+  opacity: 1;
+  transform: none;
+}
+@keyframes sheen {
+  0% {
+    transform: translateX(-120%) skewX(-20deg);
+  }
+  60%,
+  100% {
+    transform: translateX(260%) skewX(-20deg);
+  }
+}
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.anim-pop {
+  animation: pop 0.45s var(--ease-out-expo) both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* ---------- схема кузова ---------- */
+.part {
+  cursor: pointer;
+  transition:
+    fill 0.25s,
+    stroke 0.25s,
+    filter 0.25s;
+  fill: rgba(255, 255, 255, 0.035);
+  stroke: rgba(255, 255, 255, 0.32);
+  stroke-width: 1.2;
+}
+.part:hover,
+.part.is-hover {
+  fill: rgba(255, 122, 69, 0.16);
+  stroke: var(--color-lava-400);
+}
+.part.is-active {
+  fill: rgba(255, 90, 31, 0.28);
+  stroke: var(--color-lava-400);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 8px rgba(255, 90, 31, 0.7));
+}
+.glass-part {
+  fill: rgba(125, 211, 252, 0.07);
+  stroke: rgba(125, 211, 252, 0.25);
+  stroke-width: 1;
+  pointer-events: none;
+}
+.part-label {
+  pointer-events: none;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 600;
+  fill: rgba(255, 255, 255, 0.62);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+/* ---------- скроллбары ---------- */
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- контент статей ---------- */
+.prose-dark p {
+  color: var(--color-fog-300);
+  line-height: 1.75;
+  margin: 0 0 1.1rem;
+  font-size: 16.5px;
+}
+.prose-dark h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.45rem;
+  line-height: 1.2;
+  color: #fff;
+  margin: 2.5rem 0 1rem;
+  letter-spacing: -0.01em;
+}
+.prose-dark ul {
+  margin: 0 0 1.2rem;
+  display: grid;
+  gap: 0.6rem;
+}
+.prose-dark li {
+  position: relative;
+  padding-left: 1.6rem;
+  color: var(--color-fog-300);
+  line-height: 1.65;
+}
+.prose-dark li::before {
+  content: "";
+  position: absolute;
+  left: 0.2rem;
+  top: 0.62em;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--color-lava-500);
+  transform: rotate(45deg);
+}
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .js .rv {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- печать заказ-наряда ---------- */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+  body {
+    background: #fff !important;
+  }
+  body * {
+    visibility: hidden;
+  }
+  #order-print,
+  #order-print * {
+    visibility: visible;
+  }
+  #order-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none !important;
+    border: 0 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
